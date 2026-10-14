@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crop Recommendation Engine | Precision Agriculture AI</title>
+  <meta name="description" content="AI-driven crop recommendation system powered by machine learning to analyze soil nutrients and climatic parameters for optimal farming decisions.">
+  
+  <!-- Modern Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-inner">
+        <div class="brand">
+          <div class="brand-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+              <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+            </svg>
+          </div>
+          <div>
+            <h1>Crop Recommendation <span>AI</span></h1>
+            <p>Smart Precision Agriculture &bull; Machine Learning Inference</p>
+          </div>
+        </div>
+
+        <div class="model-badge">
+          <span class="status-indicator"></span>
+          <span>Trained ML Pipeline Active</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main class="main-content">
+      <div class="workspace-layout">
+        <!-- Input Form Section -->
+        <section class="card input-card">
+          <div class="card-header">
+            <div>
+              <h2 class="card-title">Enter Field Parameters</h2>
+              <p class="card-subtitle">Input your soil nutrient levels and local weather readings</p>
+            </div>
+            <button type="button" id="clearBtn" class="btn-text-action" title="Clear inputs to empty">
+              Clear All
+            </button>
+          </div>
+
+          <form id="predictionForm" novalidate>
+            <!-- Soil Nutrients Section -->
+            <div class="section-divider">
+              <span class="section-divider-title">
+                <span class="icon-label">🧪</span> Soil Nutrients (NPK)
+              </span>
+            </div>
+
+            <div class="input-grid">
+              <!-- Nitrogen (N) -->
+              <div class="form-group">
+                <label for="input_N">
+                  Nitrogen (N)
+                  <span class="unit">ratio</span>
+                </label>
+                <div class="input-wrapper">
+                  <input type="number" id="input_N" name="N" min="0" max="140" step="any" placeholder="e.g. 90" value="90" required>
+                  <span class="input-hint">0 – 140</span>
+                </div>
+              </div>
+
+              <!-- Phosphorus (P) -->
+              <div class="form-group">
+                <label for="input_P">
+                  Phosphorus (P)
+                  <span class="unit">ratio</span>
+                </label>
+                <div class="input-wrapper">
+                  <input type="number" id="input_P" name="P" min="5" max="145" step="any" placeholder="e.g. 42" value="42" required>
+                  <span class="input-hint">5 – 145</span>
+                </div>
+              </div>
+
+              <!-- Potassium (K) -->
+              <div class="form-group">
+                <label for="input_K">
+                  Potassium (K)
+                  <span class="unit">ratio</span>
+                </label>
+                <div class="input-wrapper">
+                  <input type="number" id="input_K" name="K" min="5" max="205" step="any" placeholder="e.g. 43" value="43" required>
+                  <span class="input-hint">5 – 205</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Climatic & Soil Properties Section -->
+            <div class="section-divider">
+              <span class="section-divider-title">
+                <span class="icon-label">🌦️</span> Climate & Soil Conditions
+              </span>
+            </div>
+
+            <div class="input-grid">
+              <!-- Temperature -->
+              <div class="form-group">
+                <label for="input_temperature">
+                  Temperature
+                  <span class="unit">°C</span>
+                </label>
+                <div class="input-wrapper">
+                  <input type="number" id="input_temperature" name="temperature" min="8.8" max="43.7" step="any" placeholder="e.g. 23.5" value="23.5" required>
+                  <span class="input-hint">8.8 – 43.7 °C</span>
+                </div>
+              </div>
+
+              <!-- Humidity -->
+              <div class="form-group">
+                <label for="input_humidity">
+                  Relative Humidity
+                  <span class="unit">%</span>
+                </label>
+                <div class="input-wrapper">
+                  <input type="number" id="input_humidity" name="humidity" min="14.3" max="100.0" step="any" placeholder="e.g. 82.0" value="82.0" required>
+                  <span class="input-hint">14 – 100 %</span>
+                </div>
+              </div>
+
+              <!-- Soil pH -->
+              <div class="form-group">
+                <label for="input_ph">
+                  Soil pH
+                  <span class="unit">scale</span>
+                </label>
+                <div class="input-wrapper">
+                  <input type="number" id="input_ph" name="ph" min="3.5" max="9.9" step="any" placeholder="e.g. 6.5" value="6.5" required>
+                  <span class="input-hint">3.5 – 9.9 pH</span>
+                </div>
+              </div>
+
+              <!-- Rainfall -->
+              <div class="form-group full-width">
+                <label for="input_rainfall">
+                  Rainfall
+                  <span class="unit">mm</span>
+                </label>
+                <div class="input-wrapper">
+                  <input type="number" id="input_rainfall" name="rainfall" min="20.2" max="298.6" step="any" placeholder="e.g. 202.9" value="202.9" required>
+                  <span class="input-hint">20 – 300 mm</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-footer">
+              <button type="submit" id="submitBtn" class="btn-primary">
+                <span class="btn-spinner" aria-hidden="true"></span>
+                <span class="btn-content">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+                  </svg>
+                  Predict Crop
+                </span>
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <!-- Prediction Result Output Section -->
+        <section class="card result-card" id="resultCard" aria-live="polite">
+          <div class="card-header">
+            <div>
+              <h2 class="card-title">Prediction Result</h2>
+              <p class="card-subtitle">Processed in real time by the trained machine learning pipeline</p>
+            </div>
+            <span class="status-tag" id="statusTag">Ready</span>
+          </div>
+
+          <!-- Empty Initial State -->
+          <div id="initialState" class="state-container">
+            <div class="state-icon-box">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                <path d="m9 12 2 2 4-4"/>
+              </svg>
+            </div>
+            <h3>Ready for Prediction</h3>
+            <p>Enter your field measurements and click <strong>Predict Crop</strong> to see recommendations.</p>
+          </div>
+
+          <!-- Loading State -->
+          <div id="loadingState" class="state-container hidden">
+            <div class="loading-ring"></div>
+            <h3>Analyzing Parameters...</h3>
+            <p>Evaluating 22 crop classes through the trained pipeline</p>
+          </div>
+
+          <!-- Active Prediction Results -->
+          <div id="resultContent" class="result-content hidden">
+            <!-- Hero Crop Banner -->
+            <div class="hero-crop-box">
+              <div class="hero-icon-wrap">
+                <span id="heroCropIcon" class="hero-crop-emoji">🌾</span>
+              </div>
+              <div class="hero-details">
+                <div class="hero-tag-row">
+                  <span id="heroCropCategory" class="badge-category">Cereal</span>
+                  <div class="badge-confidence">
+                    <span id="heroConfidenceScore">99.7%</span> Match
+                  </div>
+                </div>
+                <h3 id="heroCropName" class="hero-crop-title">Rice</h3>
+                <p id="heroCropNotes" class="hero-crop-desc">Optimal for heavy rainfall and high humidity conditions.</p>
+              </div>
+            </div>
+
+            <!-- Agronomic Profile Cards -->
+            <div class="specs-grid">
+              <div class="spec-card">
+                <span class="spec-caption">Ideal Soil</span>
+                <span id="specSoil" class="spec-value">Clayey Loam</span>
+              </div>
+              <div class="spec-card">
+                <span class="spec-caption">Season</span>
+                <span id="specSeason" class="spec-value">Kharif (Monsoon)</span>
+              </div>
+              <div class="spec-card">
+                <span class="spec-caption">Growth Cycle</span>
+                <span id="specDuration" class="spec-value">100 - 150 days</span>
+              </div>
+              <div class="spec-card">
+                <span class="spec-caption">Soil Acidity</span>
+                <span id="specPhStatus" class="spec-value">Neutral</span>
+              </div>
+            </div>
+
+            <!-- Probability Distribution (Top Candidates) -->
+            <div class="result-section">
+              <h4 class="result-section-title">Probability Breakdown</h4>
+              <div class="prob-list" id="distributionList">
+                <!-- Dynamically generated rows -->
+              </div>
+            </div>
+
+            <!-- Agronomic Insights -->
+            <div class="result-section">
+              <h4 class="result-section-title">Agronomic Insights</h4>
+              <div class="insights-container" id="insightsChips">
+                <!-- Dynamically generated insight chips -->
+              </div>
+            </div>
+
+            <!-- Copy Action -->
+            <div class="result-action-bar">
+              <button type="button" id="copySummaryBtn" class="btn-secondary">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                Copy Prediction
+              </button>
+              <span id="toastMsg" class="toast-feedback"></span>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
