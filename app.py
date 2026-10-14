@@ -5,9 +5,21 @@ and LabelEncoder to perform real ML inferences on user inputs.
 """
 
 import os
+import sys
 import json
 import warnings
 from pathlib import Path
+
+# If executed via `streamlit run app.py`, seamlessly dispatch to the Streamlit app
+try:
+    import streamlit.runtime
+    if streamlit.runtime.exists():
+        import runpy
+        runpy.run_path(str(Path(__file__).resolve().parent / "streamlit_app.py"), run_name="__main__")
+        sys.exit(0)
+except ImportError:
+    pass
+
 from flask import Flask, request, jsonify, render_template
 
 # Suppress unpickling version warnings between sklearn 1.6 and 1.8
