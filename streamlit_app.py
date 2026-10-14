@@ -16,6 +16,12 @@ import streamlit as st
 
 # Suppress unpickling version warnings between sklearn versions
 warnings.filterwarnings("ignore", category=UserWarning)
+warnings.filterwarnings("ignore", message=".*InconsistentVersionWarning.*")
+try:
+    from sklearn.exceptions import InconsistentVersionWarning
+    warnings.filterwarnings("ignore", category=InconsistentVersionWarning)
+except ImportError:
+    pass
 
 # --- Path Configurations & Artifact Loading ---
 BASE_DIR = Path(__file__).resolve().parent

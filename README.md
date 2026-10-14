@@ -51,5 +51,28 @@ http://localhost:8501
 
 - **Machine Learning Pipeline**: `sklearn.pipeline.Pipeline(StandardScaler(), GaussianNB())`
 - **Encoder**: `sklearn.preprocessing.LabelEncoder` (22 agricultural classes)
-- **Frontend**: Streamlit 1.58+ with custom responsive Emerald/Slate styling
+- **Frontend**: Streamlit 1.58+ with custom responsive Light Blue theme
 - **Alternative Flask API**: `python app.py` (serves the Flask REST endpoints on port 5000)
+
+---
+
+## 🌐 Deploy to Streamlit Community Cloud (Free & 1-Click)
+
+1. **Push your code to GitHub**:
+   ```bash
+   git add .
+   git commit -m "Configure requirements and deployment files for Streamlit Cloud"
+   git push origin main
+   ```
+
+2. **Sign in to Streamlit Community Cloud**:
+   - Go to [share.streamlit.io](https://share.streamlit.io/) and log in with your GitHub account.
+
+3. **Deploy the App**:
+   - Click **"Create app"** (or **"New app"**).
+   - Select your repository: `Ashish-Kumar-04/crop_recommendation` (or your fork/repo).
+   - Set **Branch**: `main`.
+   - Set **Main file path**: `streamlit_app.py` (or `app.py`).
+   - Click **"Deploy!"**.
+
+Streamlit Cloud will automatically detect `requirements.txt`, install dependencies, load the ML pipeline artifacts, and give you a live public URL (e.g., `https://crop-recommendation.streamlit.app`).
